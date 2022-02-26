@@ -1,97 +1,74 @@
 # API_YAMDB
-REST API для сервиса YaMDb — базы отзывов о фильмах, книгах и музыке.
+REST API проект для сервиса YaMDb — сбор отзывов о фильмах, книгах или музыке.
 
 ## Описание
 
-API для сервиса YaMDb.
-
-Позволяет работать со следующими сущностями:
-- Отзывы
-- Коментарии к отзывам
-- Пользователи
-- Категории (типы) произведений
-- Категории жанров
-- Произведения (на которые пишут отзывы)
-
+Проект YaMDb собирает отзывы пользователей на произведения.
+Произведения делятся на категории: «Книги», «Фильмы», «Музыка».
+Список категорий  может быть расширен (например, можно добавить категорию «Изобразительное искусство» или «Ювелирка»).
 ### Как запустить проект:
 
-Клонируйте репозиторий и перейдите в него в командной строке:
+Клонируем репозиторий и и переходим в него:
 ```
 git clone https://github.com/themasterid/infra_sp2
 cd infra_sp2
-```
-
-Перейдите в папку с проектом:
-```
 cd api_yamdb
 ```
 
-Cоздайте и активируйте виртуальное окружение:
+Создаем и активируем виртуальное окружение (linux - python3, windows - python):
 ```
 python3 -m venv venv
-source /venv/bin/activate
+source /venv/bin/activate (source /venv/Scripts/activate - для Windows)
 python -m pip install --upgrade pip
 ```
 
-Установите зависимости из файла requirements.txt:
+Ставим зависимости из requirements.txt:
 ```
 pip install -r requirements.txt
 ```
 
-Перейдите в папку с файлом docker-compose.yaml:
+Переходим в папку с файлом docker-compose.yaml:
 ```
 cd infra
 ```
 
-Разверните контейнеры:
+Поднимаем контейнеры (infra_db_1, infra_web_1, infra_nginx_1):
 ```
 docker-compose up -d --build
 ```
 
-Выполните миграции:
+Выполняем миграции:
 ```
 docker-compose exec web python manage.py migrate
 ```
 
-Создайте суперпользователя:
+Создаем суперпользователя:
 ```
 docker-compose exec web python manage.py createsuperuser
 ```
 
-Соберите статику:
+Србираем статику:
 ```
 docker-compose exec web python manage.py collectstatic --no-input
 ```
 
-Создайте дамп базы:
+Создаем дамп базы данных (нет в текущем репозитории):
 ```
-docker-compose exec web python manage.py dumpdata > fixtures.json
+docker-compose exec web python manage.py dumpdata > dumpPostrgeSQL.json
 ```
 
-Остановите приложение в контейнерах:
+Останавливаем контейнеры:
 ```
 docker-compose down -v
 ```
 
-Запустите pytest (при запущенном виртуальном окружении):
+### Шаблон наполнения .env (не включен в текущий репозиторий) расположенный по пути infra/.env
 ```
-cd infra_sp2 && pytest
-```
-
-
-### Шаблон наполнения .env
-```
-# указываем, с какой БД работаем
 DB_ENGINE=django.db.backends.postgresql
-# имя базы данных
 DB_NAME=postgres
-# логин для подключения к базе данных
 POSTGRES_USER=postgres
-# пароль для подключения к БД (установите свой)
 POSTGRES_PASSWORD=postgres
-# название сервиса (контейнера)
 DB_HOST=db
-# порт для подключения к БД
 DB_PORT=5432
 ```
 
