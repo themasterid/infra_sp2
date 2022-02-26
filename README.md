@@ -39,6 +39,7 @@ docker-compose up -d --build
 
 Выполняем миграции:
 ```
+docker-compose exec web python manage.py makemigrations reviews
 docker-compose exec web python manage.py migrate
 ```
 
@@ -73,7 +74,7 @@ DB_PORT=5432
 ```
 
 ### Документация API YaMDb
-Доступна по эндпойнту:
+Можно ознакомиться по эндпойнту:
 ```json
 /redoc/
 ```

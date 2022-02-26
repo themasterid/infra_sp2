@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
   db:
@@ -10,12 +10,12 @@ services:
 
   web:
     build:
-      context: ..
+      context: ../
       dockerfile: api_yamdb/Dockerfile
     restart: always
     volumes:
-      - static_value:/app/static/
-      - media_value:/app/media/
+      - static_value:/app/reviews/static/
+      - media_value:/app/reviews/media/
     depends_on:
       - db
     env_file:
