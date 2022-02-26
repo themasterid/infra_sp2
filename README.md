@@ -8,6 +8,7 @@ REST API проект для сервиса YaMDb — сбор отзывов о
 Список категорий  может быть расширен (например, можно добавить категорию «Изобразительное искусство» или «Ювелирка»).
 ### Как запустить проект:
 
+Все описанное ниже относится к ОС Linux.
 Клонируем репозиторий и и переходим в него:
 ```
 git clone https://github.com/themasterid/infra_sp2
@@ -15,7 +16,7 @@ cd infra_sp2
 cd api_yamdb
 ```
 
-Создаем и активируем виртуальное окружение (linux - python3, windows - python):
+Создаем и активируем виртуальное окружение:
 ```
 python3 -m venv venv
 source /venv/bin/activate (source /venv/Scripts/activate - для Windows)
@@ -40,6 +41,8 @@ docker-compose up -d --build
 Выполняем миграции:
 ```
 docker-compose exec web python manage.py makemigrations reviews
+```
+```
 docker-compose exec web python manage.py migrate
 ```
 
@@ -75,6 +78,6 @@ DB_PORT=5432
 
 ### Документация API YaMDb
 Можно ознакомиться по эндпойнту:
-```json
+```url
 /redoc/
 ```
