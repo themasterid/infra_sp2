@@ -1,10 +1,14 @@
 import os
 from datetime import timedelta
 
+from dotenv import load_dotenv
 
+load_dotenv()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = 'p&l%385148kslhtyn^##a1)ilz@4zqj=rq&agdol^##zgl9(vs'
+SECRET_KEY = (
+    os.getenv('SECRET_KEY'),
+    'my_mega_secret_code_ilz@4zqj=rq&agdol^##zgl9(vs')
 
 DEBUG = False
 
@@ -87,7 +91,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
